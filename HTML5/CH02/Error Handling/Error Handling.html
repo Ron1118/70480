@@ -6,46 +6,50 @@
     <title></title>
     <script>
 
-        window.onload = function () {
-            try {                
-                var a, b, c;
-                a = 5;
-                b = 10;
-                var result = multiplyNumbers(a, b, c);
-                alert(result);
+        //window.onload = function () {
+        //    try {                
+        //        var a, b, c;
+        //        a = 5;
+        //        b = 10;
+        //        //c = 15;
+                
+        //        var result = multiplyNumbers(a, b, c);
+        //        alert(result);
 
-            } catch (e) {
-                alert(e.message);
+        //    } catch (e) {
+        //        alert(e.message);
+        //    }
+        //}
+
+        //function multiplyNumbers(first, second, third) {
+        //    if (first == null || second == null || third == null)
+        //    {
+        //        throw new Error(1, "Forgot to initialize a number.");
+        //    }
+        //    return first * second * third;
+        //}
+
+
+            var ball = {
+                x: -1,
+                y: -1,
+                draw: function DrawBall(c) {
+                    if (this.x < 0)
+                        throw new Error(25, "Invalid X coordinate");
+                        }                
             }
-        }
 
-        function multiplyNumbers(first, second, third) {
-            if (first == null || second == null || third == null)
-            {
-                throw new Error(5, "Forgot to initialize a number.");
+            window.onload = function () {
+                try {
+                    var canvas = document.getElementById("myCanvas");
+                    var context = canvas.getContext("4d");
+                    ball.draw(context);
+                } catch (e) {
+                    alert(e.message);
+                    alert(e.number);
+                    alert(e.name);
+                }
             }
-            return first * second * third;
-        }
-
-
-            //var ball = {
-            //    x: -1,
-            //    y: -1,
-            //    draw: function DrawBall(c) {
-            //        if (this.x < 0)
-            //            throw new Error(25, "Invalid X coordinate");
-            //            }                
-            //}
-
-            //window.onload = function () {
-            //    try {
-            //        var canvas = document.getElementById("myCanvas");
-            //        var context = canvas.getContext("2d");
-            //        ball.draw(context);
-            //    } catch (e) {
-            //        alert(e.message);
-            //    }
-            //}
 
             //function WorkWithCanvas() {
             //    try {

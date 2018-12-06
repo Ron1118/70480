@@ -9,8 +9,10 @@
 
     window.onload = function () {
 
+
+        var wsUri = "wss://echo.websocket.org/";
         
-        var wsConnection;
+        var wsConnection;//= new WebSocket('wss://studygroup.70480.com', ['soap', 'xmpp']);
         var chatBox = document.getElementById("chatWindow");
 
         var disconnectButton = document.getElementById("Disconnect");
@@ -19,20 +21,26 @@
         var msgToSend = document.getElementById("msgSendText");
 
         disconnectButton.onclick = function () {
-            wsConnection.close();
+            websocket.close();
         }
 
         connectButton.onclick = function () {
             //Or the use of wss for secure WebSockets. IE: wss://studygroup.70480.com
             //Opens the WebSocket
-            wsConnection=  new WebSocket('ws://studygroup.70480.com', ['soap', 'xmpp']);
+            //wsConnection = new WebSocket('wss://studygroup.70480.com', ['soap', 'xmpp']);
+            websocket  = new WebSocket(wsUri);
+            websocket.onopen = function (evt) { onOpen(evt) };
+            websocket.onclose = function (evt) { onClose(evt) };
+            websocket.onmessage = function (evt) { onMessage(evt) };
+            websocket.onerror = function (evt) { onError(evt) };
         }
 
         sendButton.onclick = function () {
             //check the state of the connection
-            if (wsConnection.readyState == WebSocket.OPEN) {
+            alert('websocket.readyState:'+websocket.readyState);
+            if (websocket.readyState == WebSocket.OPEN) {
                 //send message to server.
-                wsConnection.send(msgToSend.value);
+                websocket.send(msgToSend.value);
             }
             else
                 return;
@@ -46,28 +54,28 @@
         }
 
         // event handler for when the WebSocket connection is established
-        wsConnection.onopen = function () {            
+        function onOpen(evt) {            
             
             chatBox.textContent = chatBox.textContent +  "System: Connection has been established";
         }
 
         //event handler for when the WebSocket encounters an error
-        wsConnection.onerror = function (err) {
+        function onError(evt) {
             //write an error to the screen
             NewLine();
-            chatBox.value = chatBox.value + "System: Error Occurred. ";
+            chatBox.value = chatBox.value + "System: Error Occurred. " + evt.value;
         }
 
-        wsConnection.onclose = function () {
+        function onClose(evt) {
             //write the connection has been closed.  
             NewLine();
             chatBox.value = chatBox.value + "System: Connection has been closed.";
         }
 
-        wsConnection.onmessage = function (msg) {
+        function onMessage(evt) {
             //write message            
             NewLine();
-            chatBox.value = chatBox.value + "Them: " + msg.data;
+            chatBox.value = chatBox.value + "Them: " + evt.data;
         }
 
 
@@ -76,8 +84,8 @@
         {            
             chatBox.textContent = chatBox.textContent + '\r\n';
         }
-
     }
+
 </script>
 <body>
     <div align="center">

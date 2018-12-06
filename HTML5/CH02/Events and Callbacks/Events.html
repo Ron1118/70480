@@ -57,30 +57,32 @@
            
        //}
 
-       window.addEventListener("load", function () {
-           document.getElementById("outer").addEventListener("click", outerDivClick, false);
-       }, false);
-
-       window.removeEventListener("load", function () {
-           document.getElementById("outer").addEventListener("click", outerDivClick, false);
-       }, false);
-       //window.onload = function () {
-       //}
-
-
-       //window.onload = function () {
+       //window.addEventListener("load", function () {
        //    document.getElementById("outer").addEventListener("click", outerDivClick, false);
+       //}, false);
+
+       //window.removeEventListener("load", function () {
        //    document.getElementById("middle").addEventListener("click", middleDivClick, false);
-       //    document.getElementById("inner").addEventListener("click", innerDivClick, false);
-       //    document.getElementById("clearButton").addEventListener("click", clearList);
+       //}, false);
+       //window.onload = function () {
        //}
+
+
+       window.onload = function () {
+           document.getElementById("outer").addEventListener("click", outerDivClick, false);
+           document.getElementById("middle").addEventListener("click", middleDivClick, false);
+           document.getElementById("inner").addEventListener("click", innerDivClick, false);
+           document.getElementById("clearButton").addEventListener("click", clearList);
+       }
 
        function outerDivClick() {
            appendText("outer Div Clicked");
+           window.event.cancelBubble = true;
        }
 
        function middleDivClick() {
            appendText("middle Div Clicked");
+           window.event.cancelBubble = true;
        }
 
        function innerDivClick() {

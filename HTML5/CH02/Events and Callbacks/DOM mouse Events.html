@@ -16,8 +16,12 @@
     </style>
     <script>
         window.onload = function () {
-            document.getElementById("yellowBox").addEventListener("mouseenter", yellowBoxEnter);
-            document.getElementById("yellowBox").addEventListener("mouseleave", yellowBoxLeave);
+            document.getElementById("yellowBox").addEventListener("dblclick", yellowBoxClick);
+            //document.getElementById("yellowBox").addEventListener("mouseleave", yellowBoxLeave);
+        }
+
+        function yellowBoxClick() {
+            document.write("Client X: " + window.event.clientX + " ClientY: " + window.event.clientY); document.write("<BR />"); document.write("offsetX: " + window.event.offsetX + " offsetY: " + window.event.offsetY); document.write("<BR />"); document.write("screen X: " + window.event.screenX + " screenY: " + window.event.screenY);
         }
 
         function yellowBoxEnter() {
