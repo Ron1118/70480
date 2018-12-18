@@ -1,5 +1,5 @@
 ﻿onmessage = function (evt) {
-    var work = 10000000;
+    var work = 100000000;
     var i = 0;
     var a = new Array(work);
     var sum = 0;

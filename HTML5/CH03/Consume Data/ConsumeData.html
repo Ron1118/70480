@@ -6,28 +6,11 @@
     <title></title>
 
     <script src="jquery-2.0.3.min.js" type="text/javascript"></script>
-    
-    
+
+
     <script>
         $("document").ready(function () {
             $("#btnGetXMLData").click(function () {
-                try {
-                    var xReq = new XMLHttpRequest();
-                    xReq.timeout = 2000;
-                    xReq.ontimeout = function () {
-                        $("#results").text("Request Timed out");
-                    }
-                    xReq.open("GET", "myXMLData.xml", false);
-                    xReq.send(null);
-                    $("#results").text(xReq.response);
-
-                }catch(e)
-                {
-                    alert(e.message);
-                }
-            });
-
-            $("#btnGetXMLDataAsync").click(function () {
                 try {
                     var XMLHTTPReadyState_COMPLETE = 4;
 
@@ -47,7 +30,33 @@
                         }
                     }
                     xReq.send(null);
-                    
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            });
+
+            $("#btnGetXMLDataAsync").click(function () {
+                try {
+                    var XMLHTTPReadyState_COMPLETE = 4;
+
+                    var xReq = new XMLHttpRequest();
+                    xReq.open("GET", "myXMLData.xml", true);
+                    xReq.timeout = 2000;
+                    xReq.ontimeout = function () {
+                        $("#results").text("Request Timed out");
+                    }
+                    xReq.onreadystatechange = function (e) {
+                        if (xReq.readyState == XMLHTTPReadyState_COMPLETE) {
+                            if (xReq.status = "200") {
+                                $("#results").text(xReq.response);
+                            } else {
+                                $("#results").text(xReq.statusText);
+                            }
+                        }
+                    }
+                    xReq.send(null);
+
 
                 } catch (e) {
                     alert(e.message);
@@ -55,13 +64,13 @@
             });
 
 
-               $("#btnGetJSONDat a").click(function () {
+            $("#btnGetJSONData").click(function () {
                 try {
                     var XMLHTTPReadyState_COMPLETE = 4;
 
                     var xReq = new XMLHttpRequest();
                     xReq.open("GET", "myJSONData.json", false);
-                    xReq.timeout = 2000;
+                    //xReq.timeout = 2000;
                     xReq.ontimeout = function () {
                         $("#results").text("Request Timed out");
                     }
@@ -86,9 +95,9 @@
 </head>
 
 <body>
-    <button id="btnGetXMLData" >Get XML Data</button>
-    <button id="btnGetXMLDataAsync" >Get XML Data Async</button>
-    <button id="btnGetJSONData" >Get JSON Data Async</button>
+    <button id="btnGetXMLData">Get XML Data</button>
+    <button id="btnGetXMLDataAsync">Get XML Data Async</button>
+    <button id="btnGetJSONData">Get JSON Data Async</button>
     <div id="results"></div>
 </body>
 </html>

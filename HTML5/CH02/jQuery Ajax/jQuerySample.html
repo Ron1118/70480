@@ -45,15 +45,13 @@
                         $('#searchResults').append(errorThrown);
                     }
                 });
-
             });
-
-
         }
 
         function InvalidSearchTerm() {
-            $('#searchResults').empty();
+            //$('#searchResults').empty();
             $('#searchResults').append('Invalid Search Term. Please try again.');
+            //$('#searchResults').contents = 'not available';
         }
 
     </script>
